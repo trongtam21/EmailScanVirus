@@ -23,7 +23,7 @@
 - You can use git to download it with the following command:
 
 ```
-
+git clone https://github.com/trongtam21/EmailScanVirus
 ```
 - To run the emailscanvirus tool, you need to install the required dependencies.
 
