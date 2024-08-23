@@ -18,12 +18,12 @@
 - ![image](introduce/2.PNG)
 - Continue, copy your api key
 - ![image](introduce/3.PNG)
-
+- Note : I have the key ready
 #### Install emailscanvirus tool
 - You can use git to download it with the following command:
 
 ```
-git clone https://github.com/trongtam21/EmailScanVirus && cd EmailScanVirus
+
 ```
 - To run the emailscanvirus tool, you need to install the required dependencies.
 

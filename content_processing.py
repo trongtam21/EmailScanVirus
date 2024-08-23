@@ -12,12 +12,21 @@ def extract_email_content(file_path):
         # Nếu là multipart, lấy nội dung từ từng phần
         for part in msg.walk():
             # Kiểm tra xem phần này có phải là văn bản không
-            if part.get_content_type() == 'text/plain':
-                # Lấy nội dung văn bản
-                return part.get_payload(decode=True).decode()
+            if part.get_content_type() == 'text/plain' or part.get_content_type() == 'text/html':
+                # Kiểm tra phương thức mã hóa
+                if part['Content-Transfer-Encoding'] == 'base64':
+                    # Decode nội dung base64
+                    payload = base64.b64decode(part.get_payload()).decode('utf-8')
+                else:
+                    payload = part.get_payload(decode=True).decode('utf-8')
+                
+                return payload
     else:
         # Nếu không phải là multipart, lấy nội dung văn bản
-        return msg.get_payload(decode=True).decode()
+        if msg['Content-Transfer-Encoding'] == 'base64':
+            return base64.b64decode(msg.get_payload()).decode('utf-8')
+        else:
+            return msg.get_payload(decode=True).decode('utf-8')
 def extract_links(text):
     # Biểu thức chính quy để tìm các liên kết URL
     url_pattern = re.compile(r'https?://\S+')
